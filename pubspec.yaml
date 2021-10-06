@@ -14,10 +14,10 @@ dependencies:
 
   cupertino_icons: ^1.0.2
 
-  authentication_repository:
-    path: packages/authentication_repository
-  user_repository:
-    path: packages/user_repository
+  firebase_auth_repository:
+    path: packages/firebase_auth_repository
+  form_inputs:
+    path: packages/form_inputs
 
   firebase_core: ^1.7.0
   firebase_analytics: ^8.3.3
@@ -26,6 +26,10 @@ dependencies:
   equatable: ^2.0.3
   formz: ^0.4.0
   flutter_bloc: ^7.3.0
+  very_good_analysis: ^2.3.0
+  flow_builder: ^0.0.4
+  google_fonts: ^2.1.0
+  font_awesome_flutter: ^9.1.0
 
 dev_dependencies:
   flutter_test:

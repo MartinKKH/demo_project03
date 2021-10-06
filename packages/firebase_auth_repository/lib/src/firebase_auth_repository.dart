@@ -219,6 +219,7 @@ class AuthenticationRepository {
   Future<void> logInWithGoogle() async {
     try {
       late final firebase_auth.AuthCredential credential;
+
       if (isWeb) {
         final googleProvider = firebase_auth.GoogleAuthProvider();
         final userCredential = await _firebaseAuth.signInWithPopup(
