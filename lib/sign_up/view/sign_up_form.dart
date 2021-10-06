@@ -1,3 +1,4 @@
+import 'package:demo_project03/email_confirm/email_confirm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,12 +9,16 @@ import '../sign_up.dart';
 class SignUpForm extends StatelessWidget {
   const SignUpForm({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<SignUpCubit, SignUpState>(
       listener: (context, state) {
         if (state.status.isSubmissionSuccess) {
-          Navigator.of(context).pop();
+          /// without email verification
+          // Navigator.of(context).pop();
+
+          Navigator.of(context).push<void>(EmailConfirmPage.route());
         } else if (state.status.isSubmissionFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()

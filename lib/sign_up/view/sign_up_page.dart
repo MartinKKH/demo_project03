@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth_repository/firebase_auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +20,15 @@ class SignUpPage extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: BlocProvider<SignUpCubit>(
           create: (_) => SignUpCubit(context.read<AuthenticationRepository>()),
-          child: const SignUpForm(),
+          child: BlocBuilder<SignUpCubit, SignUpState>(
+            builder: (context, state) {
+              if(state.email.isVerified){
+                return SignUpValidate();
+              }else{
+                return SignUpForm();
+              }
+            },
+          ),
         ),
       ),
     );

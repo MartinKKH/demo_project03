@@ -202,10 +202,13 @@ class AuthenticationRepository {
   /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs.
   Future<void> signUp({required String email, required String password}) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      firebase_auth.UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      /// TODO: [userCredential.user] may be null problem
+      await userCredential.user?.sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
     } catch (_) {
@@ -278,8 +281,9 @@ class AuthenticationRepository {
   }
 }
 
+
 extension on firebase_auth.User {
   User get toUser {
-    return User(id: uid, email: email, name: displayName, photo: photoURL);
+    return User(id: uid, email: email,emailVerified: emailVerified, name: displayName, photo: photoURL);
   }
 }
